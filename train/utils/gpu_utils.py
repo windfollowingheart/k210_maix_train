@@ -57,6 +57,7 @@ def select_gpu(memory_require=128*1024*1024, tf_gpu_mem_growth=False, logger=Non
             import tensorflow as tf
             gpus = tf.config.experimental.list_physical_devices('GPU')
             del tf
+            print(f"[INFO]: gpu_num : {gpu_num}, gpus: {len(gpus)}")
             if gpu_num <= 0 or len(gpus) <= 0:
                 pynvml.nvmlShutdown()
                 if len(gpus) <= 0 and gpu_num > 0:
