@@ -54,16 +54,16 @@ def train(model,
     except KeyboardInterrupt:
         save_model(model, save_final_weights_path, tflite_path)
         raise
-    # except AttributeError:
-    #     history = model.fit(batch_size = 1,
-    #                     steps_per_epoch  = len(train_batch_gen), 
-    #                     epochs           = nb_epoch,
-    #                     validation_data  = valid_batch_gen,
-    #                     validation_steps = len(valid_batch_gen),
-    #                     callbacks        = _create_callbacks(save_best_weights_path, other_callbacks=progress_callbacks),
-    #                     verbose          = 1,
-    #                     workers          = 3,
-    #                     max_queue_size   = 8)
+    except AttributeError:
+        history = model.fit(x = train_batch_gen,
+                        steps_per_epoch  = len(train_batch_gen), 
+                        epochs           = nb_epoch,
+                        validation_data  = valid_batch_gen,
+                        validation_steps = len(valid_batch_gen),
+                        callbacks        = _create_callbacks(save_best_weights_path, other_callbacks=progress_callbacks),
+                        verbose          = 1,
+                        workers          = 3,
+                        max_queue_size   = 8)
 
     _print_time(time.time() - train_start)
     save_model(model, save_final_weights_path, tflite_path)
