@@ -63,7 +63,8 @@ def train(model,
                         callbacks        = _create_callbacks(save_best_weights_path, other_callbacks=progress_callbacks),
                         verbose          = 1,
                         # workers          = 3,
-                        max_queue_size   = 8)
+                        # max_queue_size   = 8
+                        )
 
     _print_time(time.time() - train_start)
     save_model(model, save_final_weights_path, tflite_path)
