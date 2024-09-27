@@ -17,6 +17,7 @@ def create_yolo_network(architecture,
                            input_size,
                            nb_classes,
                            nb_box)
+    # return yolo_net.get_model().fit()
     return yolo_net
 
 
