@@ -62,7 +62,7 @@ def train(model,
                         validation_steps = len(valid_batch_gen),
                         callbacks        = _create_callbacks(save_best_weights_path, other_callbacks=progress_callbacks),
                         verbose          = 1,
-                        workers          = 3,
+                        # workers          = 3,
                         max_queue_size   = 8)
 
     _print_time(time.time() - train_start)
