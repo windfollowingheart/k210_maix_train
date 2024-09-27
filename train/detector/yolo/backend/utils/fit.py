@@ -29,7 +29,10 @@ def train(model,
     from tensorflow.keras.optimizers import Adam
 
     # 1. create optimizer
-    optimizer = Adam(lr=learning_rate, beta_1=0.9, beta_2=0.999, epsilon=1e-08, decay=0.0)
+    try:
+        optimizer = Adam(lr=learning_rate, beta_1=0.9, beta_2=0.999, epsilon=1e-08, decay=0.0)
+    except:
+        optimizer = Adam(learning_rate=learning_rate, beta_1=0.9, beta_2=0.999, epsilon=1e-08, decay=0.0)
     
     # 2. create loss function
     model.compile(loss=loss_func,
