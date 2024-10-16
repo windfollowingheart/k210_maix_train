@@ -9,3 +9,4 @@ build
 #*.zip
 *.svg
 tools/ncc/*/
+test_detector_xml_format

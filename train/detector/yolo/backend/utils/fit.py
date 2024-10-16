@@ -55,10 +55,10 @@ def train(model,
         save_model(model, save_final_weights_path, tflite_path)
         raise
     except AttributeError:
-        history = model.fit(x = train_batch_gen,
+        history = model.fit(x = train_batch_gen.repeat(),
                         steps_per_epoch  = len(train_batch_gen), 
                         epochs           = nb_epoch,
-                        validation_data  = valid_batch_gen,
+                        validation_data  = valid_batch_gen.repeat(),
                         validation_steps = len(valid_batch_gen),
                         callbacks        = _create_callbacks(save_best_weights_path, other_callbacks=progress_callbacks),
                         verbose          = 1,
