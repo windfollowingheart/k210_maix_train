@@ -29,7 +29,7 @@ def create_batch_generator(annotations,
                     img_aug,
                     annotations,
                     batch_size,
-                    repeat_times):
+                    repeat_times = 2):
             """
             # Args
                 annotations : Annotations instance
