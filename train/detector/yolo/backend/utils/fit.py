@@ -55,6 +55,8 @@ def train(model,
         save_model(model, save_final_weights_path, tflite_path)
         raise
     except AttributeError:
+        print(f"len(train_batch_gen): {len(train_batch_gen)}")
+        print(f"len(valid_batch_gen): {len(valid_batch_gen)}")
         history = model.fit(x = train_batch_gen,
                         steps_per_epoch  = len(train_batch_gen), 
                         epochs           = nb_epoch,
