@@ -134,6 +134,11 @@ class YOLO(object):
                                                                      is_only_detect)
         print(f"train_annotations: {len(train_annotations)}")
         print(f"valid_annotations: {len(valid_annotations)}")
+        print(batch_size)
+        print(train_times)
+        print(valid_times)
+        print(jitter)
+        print(valid_annotations[0])
         # 1. get batch generator
         train_batch_generator = self._get_batch_generator(train_annotations, batch_size, train_times, jitter=jitter)
         valid_batch_generator = self._get_batch_generator(valid_annotations, batch_size, valid_times, jitter=False)

@@ -13,7 +13,7 @@ def main():
         or  python3 main.py -d "datasets directory" train
 ''')
     parser.add_argument("-t", "--type", type=str, help="train type, classifier or detector", choices=supported_types, default="detector")
-    parser.add_argument("-z", "--zip", type=str, help="datasets zip file path", default="datasets/test_detector_xml_format.zip")
+    parser.add_argument("-z", "--zip", type=str, help="datasets zip file path", default="")
     parser.add_argument("-d", "--datasets", type=str, help="datasets directory", default="datasets/person1")
     parser.add_argument("-c", "--config", type=str, help="config file", default=os.path.join(curr_dir, "instance", "config.py"))
     parser.add_argument("-o", "--out", type=str, help="out directory", default=os.path.join(curr_dir, "out"))
