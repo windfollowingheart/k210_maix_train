@@ -57,7 +57,7 @@ def train(model,
     except AttributeError:
         print(f"len(train_batch_gen): {len(train_batch_gen)}")
         print(f"len(valid_batch_gen): {len(valid_batch_gen)}")
-        history = model.fit(x = train_batch_gen,
+        history = model.fit(x = iter(train_batch_gen),
                         steps_per_epoch  = int(len(train_batch_gen)), 
                         # steps_per_epoch  = 100, 
                         epochs           = nb_epoch,
