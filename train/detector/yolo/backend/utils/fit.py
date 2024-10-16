@@ -95,6 +95,7 @@ def save_model(model, h5_path, tflite_path=None):
 
         tf.compat.v1.disable_eager_execution()
         print(111111111111111111111111)
+        print(model)
         converter = tf.compat.v1.lite.TFLiteConverter.from_keras_model_file(h5_path,
                                             output_arrays=['{}/BiasAdd'.format(model.get_layer(None, -2).name)])
         print(1111111111111111111111112222222222)
