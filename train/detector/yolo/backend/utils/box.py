@@ -138,7 +138,7 @@ def to_centroid(minmax_boxes):
     """
     minmax_boxes : (N, 4)
     """
-    minmax_boxes = minmax_boxes.astype(np.float)
+    minmax_boxes = minmax_boxes.astype(np.float64)
     centroid_boxes = np.zeros_like(minmax_boxes)
     
     x1 = minmax_boxes[:,0]
