@@ -6,6 +6,6 @@ build
 *.ipynb_checkpoints
 *.spec
 *.pyc
-*.zip
+#*.zip
 *.svg
 tools/ncc/*/
