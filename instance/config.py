@@ -24,7 +24,7 @@ classifier_result_file_name_prefix = "maixhub_classifier_result"
 
 # detector
 detector_train_gpu_mem_require = 2*1024*1024*1024
-detector_train_epochs = 2
+detector_train_epochs = 1
 detector_train_batch_size = 2
 detector_train_learn_rate = 1e-4
 detector_train_max_classes_num = 15         # 最多能训练多少类
