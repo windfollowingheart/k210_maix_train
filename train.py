@@ -17,7 +17,7 @@ def main():
     parser.add_argument("-d", "--datasets", type=str, help="datasets directory", default="datasets/person1")
     parser.add_argument("-c", "--config", type=str, help="config file", default=os.path.join(curr_dir, "instance", "config.py"))
     parser.add_argument("-o", "--out", type=str, help="out directory", default=os.path.join(curr_dir, "out"))
-    parser.add_argument("-cmd", help="command", choices=["train", "init"],default="train")
+    parser.add_argument("-cmd", help="command", choices=["train", "init"], default="train")
     args = parser.parse_args()
     # init
     dst_config_path = os.path.join(curr_dir, "instance", "config.py")
