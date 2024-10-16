@@ -242,14 +242,14 @@ class Train():
     def detector_train(self, log):
                 # 检测 GPU 可用,选择一个可用的 GPU 使用
         try:
-            gpu = gpu_utils.select_gpu(memory_require = config.detector_train_gpu_mem_require, tf_gpu_mem_growth=False)
+            gpu = gpu_utils.select_gpu(memory_require = config.detector_train_gpu_mem_require, tf_gpu_mem_growth=False, create_sub_process=False)
         except Exception:
             gpu = None
         if gpu is None:
             if not config.allow_cpu:
                 log.e("no free GPU")
                 raise Exception((TrainFailReason.ERROR_NODE_BUSY, "node no enough GPU or GPU memory and not support CPU train"))
-            log.i("no GPU, will use [CPU]")
+            log.i("D_T no GPU, will use [CPU]")
         else:
             log.i("select", gpu)
 
@@ -288,6 +288,9 @@ class Train():
         # 训练结束, 生成报告
         log.i("train ok, now generate report")
         detector.report(self.result_report_img_path)
+        loss_txt_save_dir=os.path.join(self.datasets_dir,"..","..","out2","loss_txt")
+        detector.new_report(loss_txt_save_dir)
+        log.i("save successfully!")
 
         # 生成 kmodel
         log.i("now generate kmodel")

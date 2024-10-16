@@ -57,7 +57,7 @@ def select_gpu(memory_require=128*1024*1024, tf_gpu_mem_growth=False, logger=Non
             import tensorflow as tf
             gpus = tf.config.experimental.list_physical_devices('GPU')
             del tf
-            print(f"[INFO]: gpu_num : {gpu_num}, gpus: {len(gpus)}")
+            # print("开始判断gpu")
             if gpu_num <= 0 or len(gpus) <= 0:
                 pynvml.nvmlShutdown()
                 if len(gpus) <= 0 and gpu_num > 0:
@@ -75,13 +75,21 @@ def select_gpu(memory_require=128*1024*1024, tf_gpu_mem_growth=False, logger=Non
                 h = pynvml.nvmlDeviceGetHandleByIndex(i)
                 name = pynvml.nvmlDeviceGetName(h)
                 info = pynvml.nvmlDeviceGetMemoryInfo(h)
-                msg = "GPU:{}, used:{}/{}MB, free:{}MB".format(name.decode(), info.used/1024/1024, info.total/1024/1024, info.free/1024/1024)
+                # print(h, name, info)
+                # print(type(name))
+                if type(name) == bytes:
+                    name = name.decode()
+                elif type(name) == str:
+                    name = name
+                else:
+                    raise TypeError("name type error")
+                msg = "GPU:{}, used:{}/{}MB, free:{}MB".format(name, info.used/1024/1024, info.total/1024/1024, info.free/1024/1024)
                 if logger:
                     logger.i(msg)
                 if console:
                     print(msg)
                 if info.free >= memory_require:
-                    gpu = GPU_info(id = i, name = name.decode(), mem_free = info.free, mem_total = info.total)
+                    gpu = GPU_info(id = i, name = name, mem_free = info.free, mem_total = info.total)
                     os.environ["CUDA_VISIBLE_DEVICES"] = str(i)
                     import tensorflow as tf
                     tf.config.experimental.set_memory_growth(gpus[i], True)
@@ -97,6 +105,7 @@ def select_gpu(memory_require=128*1024*1024, tf_gpu_mem_growth=False, logger=Non
         return gpu
 
     def func(memory_require=128*1024*1024, tf_gpu_mem_growth=False, logger=None, console=True, pipe=None):
+        print("使用func")
         gpu = func0(memory_require, tf_gpu_mem_growth, logger, console)
         pipe.send(gpu)
 
