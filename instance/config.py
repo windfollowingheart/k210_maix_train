@@ -29,7 +29,7 @@ detector_train_batch_size = 2
 detector_train_learn_rate = 1e-4
 detector_train_max_classes_num = 15         # 最多能训练多少类
 detector_train_one_class_min_img_num = 1            # 一个类别中至少需要的样本数量
-detector_train_one_class_max_img_num = 200           # 一个类别中最多需要的样本数量
+detector_train_one_class_max_img_num = 2000           # 一个类别中最多需要的样本数量
 detector_result_file_name_prefix = "maixhub_detector_result"
 
 
