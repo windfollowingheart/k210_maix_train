@@ -10,3 +10,4 @@ build
 *.svg
 tools/ncc/*/
 test_detector_xml_format
+uu_test

@@ -58,11 +58,11 @@ def train(model,
         print(f"len(train_batch_gen): {len(train_batch_gen)}")
         print(f"len(valid_batch_gen): {len(valid_batch_gen)}")
         history = model.fit(x = train_batch_gen,
-                        steps_per_epoch  = int(len(train_batch_gen)), 
+                        # steps_per_epoch  = int(len(train_batch_gen)), 
                         # steps_per_epoch  = 100, 
                         epochs           = nb_epoch,
                         validation_data  = valid_batch_gen,
-                        validation_steps = len(valid_batch_gen),
+                        # validation_steps = len(valid_batch_gen),
                         callbacks        = _create_callbacks(save_best_weights_path, other_callbacks=progress_callbacks),
                         verbose          = 1,
                         # workers          = 3,
