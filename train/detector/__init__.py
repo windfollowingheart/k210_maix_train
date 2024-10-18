@@ -228,7 +228,7 @@ class Detector(Train_Base):
         if not self.history:
             return
         history = self.history
-        print(history)
+        # print(history)
 
         # set for server with no Tkagg GUI support, use agg(non-GUI backend)
         plt.switch_backend('agg')

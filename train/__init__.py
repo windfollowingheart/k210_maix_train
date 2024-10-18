@@ -301,10 +301,10 @@ class Train():
             detector.save(tflite_path=self.tflite_path)
             detector.get_sample_images(config.sample_image_num, self.dataset_sample_images_path)
             ok, msg = self.convert_to_kmodel(self.tflite_path, self.result_kmodel_path, config.ncc_kmodel_v3, self.dataset_sample_images_path)
-        detector.get_sample_images(config.sample_image_num, self.dataset_sample_images_path)
-        if not ok:
-            log.e("convert to kmodel fail")
-            raise Exception((TrainFailReason.ERROR_INTERNAL, "convert kmodel fail: {}".format(msg) ))
+            detector.get_sample_images(config.sample_image_num, self.dataset_sample_images_path)
+            if not ok:
+                log.e("convert to kmodel fail")
+                raise Exception((TrainFailReason.ERROR_INTERNAL, "convert kmodel fail: {}".format(msg) ))
 
         # 拷贝模板文件
         log.i("copy template files")
