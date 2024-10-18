@@ -1,9 +1,9 @@
-# from train.detector.yolo.backend.decoder import YoloDecoder
+from train.detector.yolo.backend.decoder import YoloDecoder
 
-# import tensorflow as tf
-# import cv2
-# import numpy as np
-# import time
+import tensorflow as tf
+import cv2
+import numpy as np
+import time
 import argparse
 
 parser = argparse.ArgumentParser()
@@ -15,7 +15,7 @@ model_path=args.model_path
 image_path=args.image_path
 print(model_path)
 print(image_path)
-exit()
+# exit()
 
 # 加载模型
 # model_path=r'D:\committers-2022-06\pythonworkplace\AI\k210-master\out2\m_best.h5'
@@ -65,6 +65,7 @@ print(confidence)
 text="person"
 
 cv2.putText(img1, "{}:{:.2f}".format(text,confidence), (int(x1), int(y1) - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 255), 1)
-cv2.imshow('img',img1)
-cv2.waitKey(0)
+# cv2.imshow('img',img1)
+# cv2.waitKey(0)
+cv2.imwrite("result.jpg",img1)
         
