@@ -17,6 +17,7 @@ def main():
     parser.add_argument("-d", "--datasets", type=str, help="datasets directory", default="datasets/person1")
     parser.add_argument("-c", "--config", type=str, help="config file", default=os.path.join(curr_dir, "instance", "config.py"))
     parser.add_argument("-o", "--out", type=str, help="out directory", default=os.path.join(curr_dir, "out"))
+    parser.add_argument("-e", "--epoch", type=int, help="out directory", default=-1)
     parser.add_argument("-cmd", help="command", choices=["train", "init"], default="train")
     args = parser.parse_args()
     # init
@@ -50,7 +51,10 @@ def main():
         train_task = Train(TrainType.DETECTOR,  args.zip, args.datasets, args.out)
     else:
         print("[ERROR] train type not support only support: {}".format(", ".join(supported_types)))
-    train_task.train()
+    if args.epoch > 0:
+        train_task.set_epoch(args.epoch)
+    else:
+        train_task.train()
     return 0
 
 

@@ -103,8 +103,9 @@ class Train():
         percent = percent*0.97 + 1
         self.log.i(f"progress: {percent}%, {msg}")
 
-    def train(self):
+    def train(self, epochss = None):
         warning_msg = ""
+        self.epochss = epochss if epochss else config.detector_train_epochs
         try:
             result_url, warning_msg = self.train_process(self.log)
             self.__on_success(result_url, warning_msg)
@@ -268,8 +269,9 @@ class Train():
             log.e("train datasets not valid: {}".format(e))
             raise Exception((TrainFailReason.ERROR_PARAM, "datasets not valid: {}".format(str(e))))
         try:
-
-            detector.train(epochs=config.detector_train_epochs,
+            
+            detector.train(epochs=self.epochss,
+                # epochs=config.detector_train_epochs,
                     progress_cb=self.__on_train_progress,
                     save_best_weights_path = self.best_h5_model_path,
                     save_final_weights_path = self.final_h5_model_path,
