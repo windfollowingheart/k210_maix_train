@@ -52,7 +52,7 @@ def main():
     else:
         print("[ERROR] train type not support only support: {}".format(", ".join(supported_types)))
     if args.epoch > 0:
-        train_task.set_epoch(args.epoch)
+        train_task.train(args.epoch)
     else:
         train_task.train()
     return 0
