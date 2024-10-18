@@ -2,7 +2,9 @@
 import os
 import time
 import numpy as np
-
+from packaging import version
+# 检查 TensorFlow 版本是否大于 2.15.0
+is_tf_version_greater = version.parse(tf.__version__) > version.parse('2.15.0')
 
 
 def train(model,
@@ -29,10 +31,12 @@ def train(model,
     optimizer = None
     
     from tensorflow.keras.optimizers import Adam
-
     # 1. create optimizer
     try:
-        optimizer = Adam(lr=learning_rate, beta_1=0.9, beta_2=0.999, epsilon=1e-08, decay=0.0)
+        if is_tf_version_greater:
+            optimizer = Adam(lr=learning_rate, beta_1=0.9, beta_2=0.999, epsilon=1e-08)
+        else:
+            optimizer = Adam(lr=learning_rate, beta_1=0.9, beta_2=0.999, epsilon=1e-08, decay=0.0)
     except AttributeError as e:
         print(e)
 
@@ -95,9 +99,7 @@ def train(model,
 
     _print_time(time.time() - train_start)
     import tensorflow as tf
-    from packaging import version
-    # 检查 TensorFlow 版本是否大于 2.15.0
-    is_tf_version_greater = version.parse(tf.__version__) > version.parse('2.15.0')
+    
     if not is_tf_version_greater: #如果大于2.15.0，就保存tflite
         save_model(model, save_final_weights_path, tflite_path)
     return history
