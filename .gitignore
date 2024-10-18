@@ -11,3 +11,5 @@ build
 tools/ncc/*/
 test_detector_xml_format
 uu_test
+m.h5
+*.tflite
