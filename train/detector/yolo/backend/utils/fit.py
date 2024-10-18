@@ -26,13 +26,37 @@ def train(model,
         learning_rate : float
         save_best_weights_path : str
     """
+    optimizer = None
+    
     from tensorflow.keras.optimizers import Adam
 
     # 1. create optimizer
     try:
         optimizer = Adam(lr=learning_rate, beta_1=0.9, beta_2=0.999, epsilon=1e-08, decay=0.0)
-    except:
-        optimizer = Adam(learning_rate=learning_rate, beta_1=0.9, beta_2=0.999, epsilon=1e-08, decay=0.0)
+    except AttributeError as e:
+        print(e)
+
+    if optimizer is None:
+        try:
+            optimizer = Adam(learning_rate=learning_rate, beta_1=0.9, beta_2=0.999, epsilon=1e-08, decay=0.0)
+        except AttributeError as e:
+            print(e)
+    
+    if optimizer is None:
+        try:
+            optimizer = Adam(learning_rate=0.0001, beta_1=0.9, beta_2=0.999) # 设置优化器
+        except AttributeError as e:
+            print(e)    
+    
+    if optimizer is None:
+        try:
+            from tensorflow.keras.optimizers import legacy
+            optimizer = legacy.Adam(learning_rate=0.0001, beta_1=0.9, beta_2=0.999, decay=0.01) # 设置优化器
+        except AttributeError as e:
+            print(e)  
+      
+    
+        
     
     # 2. create loss function
     model.compile(loss=loss_func,
