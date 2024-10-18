@@ -55,8 +55,8 @@ def train(model,
         save_model(model, save_final_weights_path, tflite_path)
         raise
     except AttributeError:
-        print(f"len(train_batch_gen): {len(train_batch_gen)}")
-        print(f"len(valid_batch_gen): {len(valid_batch_gen)}")
+        # print(f"len(train_batch_gen): {len(train_batch_gen)}")
+        # print(f"len(valid_batch_gen): {len(valid_batch_gen)}")
         history = model.fit(x = train_batch_gen,
                         # steps_per_epoch  = int(len(train_batch_gen)), 
                         # steps_per_epoch  = 100, 
@@ -70,7 +70,12 @@ def train(model,
                         )
 
     _print_time(time.time() - train_start)
-    save_model(model, save_final_weights_path, tflite_path)
+    import tensorflow as tf
+    from packaging import version
+    # 检查 TensorFlow 版本是否大于 2.15.0
+    is_tf_version_greater = version.parse(tf.__version__) > version.parse('2.15.0')
+    if not is_tf_version_greater: #如果大于2.15.0，就保存tflite
+        save_model(model, save_final_weights_path, tflite_path)
     return history
 
 def _print_time(process_time):
