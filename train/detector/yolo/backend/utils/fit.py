@@ -2,9 +2,12 @@
 import os
 import time
 import numpy as np
+import tensorflow as tf
 from packaging import version
 # 检查 TensorFlow 版本是否大于 2.15.0
 is_tf_version_greater = version.parse(tf.__version__) > version.parse('2.15.0')
+del tf
+del version
 
 
 def train(model,
